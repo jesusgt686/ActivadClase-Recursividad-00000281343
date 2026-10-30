@@ -3,16 +3,16 @@ package funcionesrecursivas;
 public class FuncionesRecursivas {
 
     public static void main(String[] args) {
-        System.out.println("------------------PRUEBAS DE FUNCIONES RECURSIVAS------------------");
+        System.out.println("-------------PRUEBAS DE FUNCIONES RECURSIVAS-------------");
         
         System.out.println("Suma de 1 hasta n:");
         System.out.println("Recibes 5");
-        System.out.println("Resultado: " + sumarHastaN(5));
+        System.out.println("Resultado: " + sumaTotal(5));
         System.out.println("");
         
         System.out.println("Invertir un string:");
         System.out.println("Recibes Murcielago");
-        System.out.println("Resultado: " + invertirString("Murcielago"));
+        System.out.println("Resultado: " + invertir("Murcielago"));
         System.out.println("");
         
         System.out.println("Contar los digitos de un numero:");
@@ -20,29 +20,33 @@ public class FuncionesRecursivas {
         System.out.println("Resultado: " + contarDigitos(78951));
     }
 
-    public static int sumarHastaN(int n) {
-        if (n <= 1) {
-            return n;
+    public static int sumaTotal(int n) {
+        if (n == 1) {
+            return 1;
         }
-        return n + sumarHastaN(n - 1);
+        int sumaAnterior = sumaTotal(n - 1);
+        return n + sumaAnterior;
     }
 
-    public static String invertirString(String texto) {
-        if (texto.isEmpty()) {
-            return texto;
+    public static String invertir(String palabra) {
+        if (palabra.length() <= 1) {
+            return palabra;
         }
+        char ultimaLetra = palabra.charAt(palabra.length() - 1);
+        String resto = palabra.substring(0, palabra.length() - 1);
         
-        return invertirString(texto.substring(1)) + texto.charAt(0);
+        return ultimaLetra + invertir(resto);
     }
 
-    public static int contarDigitos(int numero) {
-        numero = Math.abs(numero);
+    public static int contarDigitos(int n) {
+        n = Math.abs(n);
         
-        if (numero < 10) {
+        if (n < 10) {
             return 1;
         }
         
-        return 1 + contarDigitos(numero / 10);
+        int digitosRestantes = contarDigitos(n / 10);
+        return 1 + digitosRestantes;
     }
 }
     
